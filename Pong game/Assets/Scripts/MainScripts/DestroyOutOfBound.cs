@@ -17,15 +17,15 @@ public class DestroyOutOfBound : MonoBehaviour
     {
         if (transform.position.x > xBound )
         {
-            Destroy(gameObject);
             pointControllerScript.p1Point++; //increase point
-            pointControllerScript.SpawnBall();
+            pointControllerScript.continueSpawn = true;
+            Destroy(gameObject);
         }
         if (transform.position.x < -xBound)
         {
-            Destroy(gameObject);
             pointControllerScript.p2Point++;
-            pointControllerScript.SpawnBall();
+            pointControllerScript.continueSpawn = true;
+            Destroy(gameObject);
         }
 
     }

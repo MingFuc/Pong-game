@@ -11,12 +11,14 @@ public class PointController : MonoBehaviour
     public TextMeshProUGUI p1Text;
     public TextMeshProUGUI p2Text;
     public GameObject ball;
+    public bool continueSpawn = false;
+    public int roundToWin = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         destroyOutOfBoundScript = GetComponent<DestroyOutOfBound>();
-        SpawnBall();
+        StartCoroutine(SpawnBallAfter3Second());
 
     }
 
@@ -26,23 +28,34 @@ public class PointController : MonoBehaviour
         p1Text.text = p1Point.ToString();
         p2Text.text = p2Point.ToString();
         GameManager();
+        
     }
     void GameManager()
     {
-        if (p1Point == 3)
+        if (p1Point == roundToWin)
         {
             Debug.Log("Player 1 win");
         }
-        if (p2Point == 3)
+        if (p2Point == roundToWin)
         {
             Debug.Log("Player 2 win");
+        }
+        if (continueSpawn == true)
+        {
+            StartCoroutine(SpawnBallAfter3Second());
+            continueSpawn = false;
         }
     }
     public void SpawnBall()
     {
-        if (!(p1Point == 3 || p2Point == 3))
+        if (!(p1Point == roundToWin || p2Point == roundToWin))
         {
             Instantiate(ball);
         }
+    }
+    public IEnumerator SpawnBallAfter3Second()
+    {
+        yield return new WaitForSeconds(3);
+        SpawnBall();
     }
 }

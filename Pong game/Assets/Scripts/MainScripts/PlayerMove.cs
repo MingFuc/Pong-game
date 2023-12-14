@@ -8,11 +8,13 @@ public class PlayerMove : MonoBehaviour
     private float moveSpeed = 20;
     private float flipSpeed = 1;
     private float rotateAngle = 1;
-    
+    private float bound = 8.5f;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -23,16 +25,25 @@ public class PlayerMove : MonoBehaviour
     }
     void MoveUpOrDown()
     {
+        if (gameObject.transform.position.y > bound)
+        {
+            gameObject.transform.position = (new Vector2(gameObject.transform.position.x, bound));
+        }
+        if (gameObject.transform.position.y < -bound)
+        {
+            gameObject.transform.position = (new Vector2(gameObject.transform.position.x, -bound));
+        }
+
         if (gameObject.CompareTag("Player 1"))
         {
             if (Input.GetKey(KeyCode.W))
             {
 
-                gameObject.transform.Translate(new Vector2(0,1) * moveSpeed * Time.deltaTime, Space.World);
+                gameObject.transform.Translate(new Vector2(0, 1) * moveSpeed * Time.deltaTime, Space.World);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                gameObject.transform.Translate(new Vector2(0, 1) * - moveSpeed * Time.deltaTime, Space.World);
+                gameObject.transform.Translate(new Vector2(0, 1) * -moveSpeed * Time.deltaTime, Space.World);
             }
         }
         if (gameObject.CompareTag("Player 2"))
@@ -44,7 +55,7 @@ public class PlayerMove : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                gameObject.transform.Translate(new Vector2(0, 1) * - moveSpeed * Time.deltaTime, Space.World);
+                gameObject.transform.Translate(new Vector2(0, 1) * -moveSpeed * Time.deltaTime, Space.World);
             }
         }
     }
@@ -55,11 +66,11 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
 
-                gameObject.transform.Rotate(new Vector3(0,0,1) * flipSpeed *Time.deltaTime, - rotateAngle);
+                gameObject.transform.Rotate(new Vector3(0, 0, 1) * flipSpeed * Time.deltaTime, -rotateAngle);
             }
             if (Input.GetKey(KeyCode.A))
             {
-                gameObject.transform.Rotate(new Vector3(0, 0, 1) * flipSpeed * Time.deltaTime,  rotateAngle);
+                gameObject.transform.Rotate(new Vector3(0, 0, 1) * flipSpeed * Time.deltaTime, rotateAngle);
             }
         }
         if (gameObject.CompareTag("Player 2"))
@@ -67,11 +78,11 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.RightArrow))
             {
 
-                gameObject.transform.Rotate(new Vector3(0, 0, 1) * flipSpeed * Time.deltaTime, - rotateAngle);
+                gameObject.transform.Rotate(new Vector3(0, 0, 1) * flipSpeed * Time.deltaTime, -rotateAngle);
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                gameObject.transform.Rotate(new Vector3(0, 0, 1) * flipSpeed * Time.deltaTime,  rotateAngle);
+                gameObject.transform.Rotate(new Vector3(0, 0, 1) * flipSpeed * Time.deltaTime, rotateAngle);
             }
         }
     }

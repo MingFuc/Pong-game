@@ -43,10 +43,10 @@ public class BallBehavior : MonoBehaviour
         switch (colliderCount)
         {
             case 3:
-                pM.bounciness = 1.15f;
+                pM.bounciness = 1.2f;
                 break;
             case 6:
-                pM.bounciness = 1.2f;
+                pM.bounciness = 1.3f;
                 break;
         }
     }

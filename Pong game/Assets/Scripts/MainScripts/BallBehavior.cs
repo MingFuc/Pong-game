@@ -9,6 +9,7 @@ public class BallBehavior : MonoBehaviour
     private PhysicsMaterial2D pM;
     private float speed = 15;
     private int[] leftOrRight = {-1, 1};
+    private int maxBoundNumberBeforeDeflect = 20;
 
     public int colliderCount = 0;
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class BallBehavior : MonoBehaviour
     void FixedUpdate()
     {    
         FasterMoving();
+        
     }
     void BallFlyAtSpawn()
     {
@@ -50,6 +52,14 @@ public class BallBehavior : MonoBehaviour
                 pM.bounciness = 1.4f;
                 break;
         }
+        //deflect the ball if it bounces too much
+        if (colliderCount > maxBoundNumberBeforeDeflect)
+        {
+
+            transform.Translate(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * speed); 
+
+        }
+        //
     }
 
 }

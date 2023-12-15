@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DestroyOutOfBound : MonoBehaviour
 {
     private float xBound = 24;
     private PointController pointControllerScript;
+
     // Start is called before the first frame update
     void Start()
     {

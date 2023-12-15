@@ -9,19 +9,22 @@ public class PlayerMove : MonoBehaviour
     private float flipSpeed = 1;
     private float rotateAngle = 1;
     private float bound = 8.5f;
+    private AudioSource audioSource;
+    private PointController pointControllerScript;
 
-
-    // Start is called before the first frame update
+    public AudioClip collideSound;
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
+        pointControllerScript = GameObject.Find("Game Manager").GetComponent<PointController>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        MoveUpOrDown();
-        Flip();
+        if (pointControllerScript.isGameOver == false)
+        {
+            MoveUpOrDown();
+            Flip();
+        }
     }
     void MoveUpOrDown()
     {
@@ -86,4 +89,13 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            //Debug.Log("sound on");
+            audioSource.PlayOneShot(collideSound, 1f);
+        }
+    }
+    
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PointController : MonoBehaviour
 {
-
+    public static PointController instance;
     public int p1Point = 0;
     public int p2Point = 0;
     public TextMeshProUGUI p1Text;
@@ -17,7 +17,25 @@ public class PointController : MonoBehaviour
     public GameObject winRight;
     public GameObject restartButton;
     public bool isGameOver = false;
+    public bool isBallSpawning = false;
+    public bool onePlayer;
 
+    public GameObject pBot;
+    public GameObject p2;
+    private void Awake()
+    {
+        instance = this;
+
+        onePlayer = PlayerSelect.instance.choose1Player;
+        if (onePlayer == true)
+        {
+            pBot.SetActive(true);
+        }
+        else
+        {
+            p2.SetActive(true);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +45,10 @@ public class PointController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //tracking point
         p1Text.text = p1Point.ToString();
         p2Text.text = p2Point.ToString();
+        //
         GameManager();
     }
     void GameManager()
@@ -59,6 +79,7 @@ public class PointController : MonoBehaviour
         {
             Vector2 spawnPosition = new Vector2(0, Random.Range(-7, 7));
             Instantiate(ball, spawnPosition, transform.rotation);
+            isBallSpawning = true;
         }
     }
     public IEnumerator SpawnBallAfter1Second()

@@ -7,6 +7,8 @@ public class ExitToMenu : MonoBehaviour
 {
     public void ExitToMainMenu()
     {
+        GameObject playerSelect = GameObject.Find("Player Selection");
+        Destroy(playerSelect);
         SceneManager.LoadScene(0);
     }
     public void ReloadCurrentScene()

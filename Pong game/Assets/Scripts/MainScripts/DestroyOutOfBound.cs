@@ -22,12 +22,14 @@ public class DestroyOutOfBound : MonoBehaviour
             pointControllerScript.p1Point++; //increase point
             pointControllerScript.continueSpawn = true;
             Destroy(gameObject);
+            pointControllerScript.isBallSpawning = false;
         }
         if (transform.position.x < -xBound)
         {
             pointControllerScript.p2Point++;
             pointControllerScript.continueSpawn = true;
             Destroy(gameObject);
+            pointControllerScript.isBallSpawning = false;
         }
 
     }

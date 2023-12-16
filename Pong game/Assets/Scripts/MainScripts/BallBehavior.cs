@@ -8,7 +8,7 @@ public class BallBehavior : MonoBehaviour
     private Rigidbody2D ballRb;
     private PhysicsMaterial2D pM;
     private float speed = 15;
-    private int[] leftOrRight = {-1, 1};
+    private int[] leftOrRight = { -1, 1 };
     private int maxBoundNumberBeforeDeflect = 20;
 
     public int colliderCount = 0;
@@ -22,9 +22,13 @@ public class BallBehavior : MonoBehaviour
         BallFlyAtSpawn();
     }
     void FixedUpdate()
-    {    
+    {
         FasterMoving();
-        
+
+    }
+    private void Update()
+    {
+        BotChasingBallIfPlay1Player();
     }
     void BallFlyAtSpawn()
     {
@@ -61,10 +65,18 @@ public class BallBehavior : MonoBehaviour
         if (colliderCount > maxBoundNumberBeforeDeflect || groundColliderCount > maxBoundNumberBeforeDeflect)
         {
 
-            transform.Translate(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * speed); 
+            transform.Translate(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * speed);
 
         }
         //
+    }
+    void BotChasingBallIfPlay1Player()
+    {
+        if (PointController.instance.onePlayer == true)
+        {
+            //Debug.Log("Bot player found");
+            BotBehavior.instance.ChasingBall(this.transform.position.y);
+        }
     }
 
 }

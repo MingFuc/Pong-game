@@ -12,6 +12,7 @@ public class BallBehavior : MonoBehaviour
     private int maxBoundNumberBeforeDeflect = 20;
 
     public int colliderCount = 0;
+    public int groundColliderCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,10 @@ public class BallBehavior : MonoBehaviour
         {
             colliderCount++;
         }
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            groundColliderCount++;
+        }
     }
 
     public void FasterMoving() //faster when collide with platform
@@ -53,7 +58,7 @@ public class BallBehavior : MonoBehaviour
                 break;
         }
         //deflect the ball if it bounces too much
-        if (colliderCount > maxBoundNumberBeforeDeflect)
+        if (colliderCount > maxBoundNumberBeforeDeflect || groundColliderCount > maxBoundNumberBeforeDeflect)
         {
 
             transform.Translate(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * speed); 

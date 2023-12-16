@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderCount: 0
+  groundColliderCount: 0
 --- !u!114 &332134242
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -40,7 +40,7 @@ public class BallBehavior : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player 1") || collision.gameObject.CompareTag("Player 2"))
+        if (collision.gameObject.CompareTag("Player 1") || collision.gameObject.CompareTag("Player 2") || collision.gameObject.CompareTag("Player Bot"))
         {
             colliderCount++;
         }
@@ -61,12 +61,11 @@ public class BallBehavior : MonoBehaviour
                 pM.bounciness = 1.4f;
                 break;
         }
-        //deflect the ball if it bounces too much
+        //destroy the ball if it bounces too much
         if (colliderCount > maxBoundNumberBeforeDeflect || groundColliderCount > maxBoundNumberBeforeDeflect)
         {
-
-            transform.Translate(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * speed);
-
+            Destroy(gameObject);
+            PointController.instance.continueSpawn = true;
         }
         //
     }

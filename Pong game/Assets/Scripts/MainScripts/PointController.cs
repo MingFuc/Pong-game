@@ -12,7 +12,7 @@ public class PointController : MonoBehaviour
     public TextMeshProUGUI p2Text;
     public GameObject ball;
     public bool continueSpawn = false;
-    public int roundToWin = 3;
+    public int roundToWin;
     public GameObject winLeft;
     public GameObject winRight;
     public GameObject restartButton;
@@ -24,6 +24,7 @@ public class PointController : MonoBehaviour
     public GameObject p2;
     private void Awake()
     {
+        roundToWin = RefRoundSelec.instance.refDefaultRound;
         instance = this;
 
         onePlayer = PlayerSelect.instance.choose1Player;
